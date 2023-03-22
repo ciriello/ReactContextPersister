@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# React Context Persistence Concept
+
+## Problem - Application state persistence and browser refresh
+
+How to implement an application state persistence that could restore state after page reload using react context and using a ttl to invalidate the cached data.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
