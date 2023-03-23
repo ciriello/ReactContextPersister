@@ -1,4 +1,4 @@
-# React Context Persistence Concept
+# React Context Persistence Study
 
 ## Problem - Application state persistence and browser refresh
 
@@ -7,6 +7,8 @@ How to implement an application state persistence that could restore state after
 ## Solution - Persistence Manager
 
 Implemented a persistence manager and helper class to store data from the context into the browser local storage. There are ofcourse many other (better) solutions, but for an initial tryout and its written in pure js :)
+
+Once the Context gets updated, the state is passed down into the Persistence Manager which will store it in localstorage. If the browser reloads the page, it will first initialize the context with the cached context data if present, otherwise it will initialize the context with default values. The initialization also takes into account the TTL value of the cached data. If the TTL has been expired, it will flush the data and reinitialize default values.
 
 Any comments and suggestions are welcome.
 
