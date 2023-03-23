@@ -25,11 +25,20 @@ SOFTWARE.
 const KEY_CONTEXT = 'mainContext'
 const KEY_CONTEXT_TTL = 'mainContextTTL'
 
+/**
+ * Resets the cached data and reloads page
+ */
 const resetInitialState = ()  => {
     window.localStorage.clear()
     window.location.reload()
 }
 
+/**
+ * Sets or Resets the application state from cache
+ * @param {*} initialState : The initial state of the context
+ * @param {*} ttl : The TTL value of the data
+ * @returns the default initial or cached state value
+ */
 const loadInitialState = (initialState, ttl) => {
     const currentTime = new Date().getTime()
     const ms = ttl * 1000
@@ -46,6 +55,12 @@ const loadInitialState = (initialState, ttl) => {
     }
 }
 
+/**
+ * A JSX component to handle context data persistence. Note this components does not
+ * pass through children.
+ * @param {*} param0 data : The Data to persist
+ * @returns null jsx component
+ */
 const PersistenceManager = ({ data }) => {
     const dataToString = JSON.stringify(data)
     window.localStorage.setItem(KEY_CONTEXT, dataToString)
