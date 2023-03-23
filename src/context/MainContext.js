@@ -24,9 +24,11 @@ SOFTWARE.
 
 import React, { useContext, useState } from "react"
 import PersistenceManager, { loadInitialState, resetInitialState } from "./ContextHelper"
-  
+ 
+/** Creating The Main Context */
 export const MainContext = React.createContext()
 
+/** Initialize default state */
 const initialState = {
     triggerRefresh: false,
     firstName: "First",
@@ -36,16 +38,26 @@ const initialState = {
     }
 }
 
+/** Creating the Main Context Provider */
 const MainContextProvider = ({children}) => {
     
-    // ttl in seconds
+    /**
+     * (re)-initialize Context State and setup TTL
+     * ttl is set to 20 seconds
+     */
     const ttl = 20
     const state = loadInitialState(initialState, ttl)
 
+    /**
+     * The Context State Variables
+     */
     const [firstName, setFirstName] = useState(state.firstName)
     const [lastName, setLastName] = useState(state.lastName)
     const [remoteData, setRemoteData] = useState(state.remoteData)
 
+    /**
+     * The Context Callback functions and handlers
+     */
     const fetchRemoteData = () => {
         fetch("https://dummyjson.com/products/2")
             .then(response => response.json())
@@ -53,17 +65,23 @@ const MainContextProvider = ({children}) => {
             .then(data => setRemoteData(data));
     }
 
+    /**
+     * The data that will be persisted
+     */
     const contextData = {
-        firstName,
-        lastName,
-        remoteData,
+        firstName,        // the first name
+        lastName,         // the last name
+        remoteData,       // dummy data fetched remotely (async)
     }
 
+    /**
+     * Callback handlers (will not be persisted)
+     */
     const contextHandlers = {
-        setFirstName,
-        setLastName,
-        fetchRemoteData,
-        resetInitialState
+        setFirstName,      // updates firstName
+        setLastName,       // updates lastname
+        fetchRemoteData,   // fetches some dummy data async
+        resetInitialState  // clear state and reload browser
     }
 
     return (
