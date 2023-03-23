@@ -4,6 +4,11 @@
 
 How to implement an application state persistence that could restore state after page reload using react context and using a ttl to invalidate the cached data.
 
+## Solution - Persistence Manager
+
+Implemented a persistence manager and helper class to store data from the context into the browser local storage. There are ofcourse many other (better) solutions, but for an initial tryout and its written in pure js :)
+
+Any comments and suggestions are welcome.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
